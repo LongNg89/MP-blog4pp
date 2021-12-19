@@ -34,6 +34,6 @@
     <color name="red_light">#FF5D5E</color>
     <color name="red">#DE2828</color>
     <color name="red_dark">#B40000</color>
-    <color name="transparent">#FFFFFF00</color>
+    <color name="transparent">#00FFFFFF</color>
     <color name="black_primary">#39374E</color>
 </resources>
