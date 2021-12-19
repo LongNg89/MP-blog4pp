@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Blog4pp</string>
+    <string name="image_view_background_register_activity">Image View Background Register Activity</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="go_back">Go Back</string>
 </resources>
