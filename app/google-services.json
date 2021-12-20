@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "414283061279",
+    "project_id": "blog-e61dc",
+    "storage_bucket": "blog-e61dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414283061279:android:dd9a20f8628cfe5f055d2a",
+        "android_client_info": {
+          "package_name": "com.longng.blog4pp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414283061279-gq75dbjsdhtk8a20127nhq0pqocqkn4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2PiQrRYhg5LXhjbjH3lXraD4igiOIloI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414283061279-gq75dbjsdhtk8a20127nhq0pqocqkn4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
