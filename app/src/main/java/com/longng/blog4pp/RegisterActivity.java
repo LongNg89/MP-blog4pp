@@ -3,10 +3,13 @@ package com.longng.blog4pp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toolbar;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,5 +55,15 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         btGoBack.setOnClickListener((view) -> finish());
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 }
