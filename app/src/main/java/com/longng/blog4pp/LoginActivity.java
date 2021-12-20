@@ -49,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener((view) -> {
             final String email = etEmail.getText().toString();
             final String password = etPassword.getText().toString();
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+            builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
+            builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
             try {
                 FirebaseAuth
                         .getInstance()
@@ -59,20 +62,14 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         })
                         .addOnFailureListener(command -> {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage(command.getMessage());
                             builder.setTitle(R.string.error);
-                            builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
-                            builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         });
             } catch (Exception e) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                 builder.setMessage(e.getMessage());
                 builder.setTitle(R.string.error);
-                builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
-                builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
