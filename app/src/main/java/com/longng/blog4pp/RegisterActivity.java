@@ -1,5 +1,6 @@
 package com.longng.blog4pp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -44,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     @BindView(
             R.id.et_password
     )
-    protected EditText edPassword;
+    protected EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,37 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         toolbar.setNavigationOnClickListener((view) -> finish());
 
+        btRegister.setOnClickListener((view) -> {
+            final String email = etEmail.getText().toString();
+            final String password = etPassword.getText().toString();
+            try {
+                FirebaseAuth
+                        .getInstance()
+                        .createUserWithEmailAndPassword(email, password)
+                        .addOnSuccessListener((authResult) -> {
+                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(command -> {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setMessage(command.getMessage());
+                            builder.setTitle(R.string.error);
+                            builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
+                            builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        });
+            } catch (Exception e) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setMessage(e.getMessage());
+                builder.setTitle(R.string.error);
+                builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
+                builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         btGoBack.setOnClickListener((view) -> finish());
     }
