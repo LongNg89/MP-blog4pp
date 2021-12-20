@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (FirebaseAuth.getInstance().getCurrentUser() == null)
                 intent.setClass(MainActivity.this, LoginActivity.class);
-            // Set Navigation to Home
-            // Code to else
+            else
+                intent.setClass(MainActivity.this, HomeActivity.class);
             startActivity(intent);
         }
     }
