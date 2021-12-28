@@ -13,14 +13,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        synchronized (MainActivity.this) {
-            Intent intent = new Intent();
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (FirebaseAuth.getInstance().getCurrentUser() == null)
-                intent.setClass(MainActivity.this, LoginActivity.class);
-            else
-                intent.setClass(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-        }
+
     }
 }

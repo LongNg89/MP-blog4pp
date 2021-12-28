@@ -1,98 +1,122 @@
 package com.longng.blog4pp;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toolbar;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(
-            R.id.toolbar
-    )
-    protected Toolbar toolbar;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(
-            R.id.bt_back_to_login
-    )
-    protected Button btGoBack;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(
-            R.id.bt_register
-    )
-    protected Button btRegister;
-
-    @SuppressLint("NonConstantResourceId")
-    @BindView(
-            R.id.et_email
-    )
-
-    protected EditText etEmail;
-    @SuppressLint("NonConstantResourceId")
-    @BindView(
-            R.id.et_password
-    )
-    protected EditText etPassword;
+    private ProgressBar registerProgress;
+    private EditText registerEmail, registerPassword, registerConfirmPassword;
+    private Button registerButton;
+    private TextView alreadyHaveAccount;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-        toolbar.setNavigationOnClickListener((view) -> finish());
 
-        btRegister.setOnClickListener((view) -> {
-            final String email = etEmail.getText().toString();
-            final String password = etPassword.getText().toString();
-            final AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-            builder.setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
-            builder.setNegativeButton(R.string.cancel, (dialog, id) -> dialog.cancel());
-            try {
-                FirebaseAuth
-                        .getInstance()
-                        .createUserWithEmailAndPassword(email, password)
-                        .addOnSuccessListener((authResult) -> {
-                            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                        })
-                        .addOnFailureListener(command -> {
-                            builder.setMessage(command.getMessage());
-                            builder.setTitle(R.string.error);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                        });
-            } catch (Exception e) {
-                builder.setMessage(e.getMessage());
-                builder.setTitle(R.string.error);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+        registerEmail = findViewById(R.id.emailRegisterTxt);
+        registerPassword = findViewById(R.id.passRegisterTxt);
+        registerConfirmPassword = findViewById(R.id.passConfirmRegisterTxt);
+        registerButton = findViewById(R.id.registerBtn);
+        alreadyHaveAccount = findViewById(R.id.alreadyHaveAccount);
+        registerProgress = findViewById(R.id.registerProgressBar);
+        mAuth = FirebaseAuth.getInstance();
+
+        alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendToLogin();
+                finish();
             }
         });
 
-        btGoBack.setOnClickListener((view) -> finish());
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email, password, passConfirm;
+                email = registerEmail.getText().toString().trim();
+                password = registerPassword.getText().toString().trim();
+                passConfirm = registerConfirmPassword.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    registerEmail.setError("Please enter email address!");
+                }
+                if (!TextUtils.isEmpty(password)) {
+                    registerPassword.setError("Please enter password!");
+                }
+                if (password.length() < 6) {
+                    registerPassword.setError("Password must be 6 characters or longer!");
+                }
+                if (!password.equals(passConfirm)) {
+                    registerConfirmPassword.setError("Password not match!");
+                }
+                else {
+                        registerProgress.setVisibility(View.VISIBLE);
+                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("mpProject","signInWithEmail:success");
+                                    Toast.makeText(RegisterActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
+                                    //sendToSetting();
+                                }
+                                else {
+                                    Log.w("mpProject", "signUpWithEmail:failure", task.getException());
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(RegisterActivity.this, error, Toast.LENGTH_SHORT).show();
+                                }
+                                registerProgress.setVisibility(View.INVISIBLE);
+                            }
+                        });
+                }
+            }
+        });
+
+    }
+/* uncomment when create AccountSetupActivity
+    private void sendToSetting() {
+        Intent accountSetup = new Intent(RegisterActivity.this, AccountSetupActivity.class);
+        startActivity(accountSetup);
+        finish();
+    }
+*/
+    //Checks if the user have already logged in
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //If user have logged in send back to MainActivity
+        if(currentUser != null){
+            sendToMain();
+        }
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
+    private void sendToMain() {
+        Intent main = new Intent(RegisterActivity.this,MainActivity.class);
+        startActivity(main);
+    }
+
+    private void sendToLogin() {
+        Intent login = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(login);
     }
 }
