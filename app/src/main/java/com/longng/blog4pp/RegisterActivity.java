@@ -92,13 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-/* uncomment when create AccountSetupActivity
+
     private void sendToSetting() {
         Intent accountSetup = new Intent(RegisterActivity.this, AccountSetupActivity.class);
         startActivity(accountSetup);
         finish();
     }
-*/
+
     //Checks if the user have already logged in
     @Override
     protected void onStart() {
