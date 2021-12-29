@@ -1,15 +1,15 @@
 package com.longng.blog4pp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Please choose profile photo and name", Toast.LENGTH_LONG).show();
-                        Intent main = new Intent(MainActivity.this, AccountSetupActivity.class);
-                        startActivity(main);
+                        Intent accSetup = new Intent(MainActivity.this, AccountSetupActivity.class);
+                        startActivity(accSetup);
                     }
                 }
             });
@@ -138,13 +138,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
     }
-    /*
-        @Override
-        public void onBackPressed() {
-            super.onBackPressed();
-            finishAffinity();
-        }
-    */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
+
     private void sendToLogin() {
         Intent login = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(login);
