@@ -33,4 +33,7 @@
     <string name="like_count">69</string>
     <string name="comment_count">420</string>
     <string name="contentDescImg">image</string>
+    <string name="message">Chat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_message_fragment">Message fragment</string>
 </resources>

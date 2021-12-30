@@ -6,15 +6,20 @@
         android:id="@+id/bottomHome"
         android:icon="@drawable/baseline_home_black_18dp"
         android:title="@string/home"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/bottomNotification"
-        android:icon="@drawable/baseline_notifications_black_18dp"
-        android:title="@string/notifications"
-        app:showAsAction="always" />
+        android:id="@+id/bottomMessage"
+        android:icon="@drawable/baseline_message_black_24dp"
+        android:title="@string/message"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/bottomAccount"
         android:icon="@drawable/baseline_account_circle_black_18dp"
         android:title="@string/account"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bottomNotification"
+        android:icon="@drawable/baseline_notifications_black_18dp"
+        android:title="@string/notifications"
+        app:showAsAction="ifRoom" />
 </menu>
