@@ -17,5 +17,7 @@
     <color name="black">#000000</color>
     <color name="light_grey">#8C8585</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="dark_blue">#002863</color>
+    <color name="dark_charcoal">#333333</color>
 
 </resources>

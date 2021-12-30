@@ -2,7 +2,7 @@ package com.longng.blog4pp.models;
 
 import java.util.Date;
 
-public class BlogPostModel {
+public class BlogPostModel extends BlogPostId{
 
     public String image_url, image_thumb, description, userId;
     public Date timeStamp;

@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blog4pp">
         <activity
+            android:name=".CommentActivity"
+            android:exported="true" />
+        <activity
             android:name=".NewPostActivity"
             android:exported="true" />
         <activity
