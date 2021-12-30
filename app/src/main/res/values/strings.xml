@@ -14,4 +14,15 @@
     <string name="already_have_an_account">Already have an account?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Username</string>
+    <string name="save">Save account settings</string>
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="account">Account</string>
+    <string name="account_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="hello_account_fragment">Account fragment</string>
+    <string name="hello_Notification_fragment">Notification fragment</string>
+    <string name="add_description">Add Description....</string>
+    <string name="add_post">Add Post</string>
 </resources>

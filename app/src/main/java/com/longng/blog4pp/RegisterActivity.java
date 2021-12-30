@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(email)) {
                     registerEmail.setError("Please enter email address!");
                 }
-                if (!TextUtils.isEmpty(password)) {
+                if (TextUtils.isEmpty(password)) {
                     registerPassword.setError("Please enter password!");
                 }
                 if (password.length() < 6) {
@@ -92,13 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-/* uncomment when create AccountSetupActivity
+
     private void sendToSetting() {
         Intent accountSetup = new Intent(RegisterActivity.this, AccountSetupActivity.class);
         startActivity(accountSetup);
         finish();
     }
-*/
+
     //Checks if the user have already logged in
     @Override
     protected void onStart() {
