@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(email)) {
                     loginEmail.setError("Please enter email address!");
                 }
-                if (TextUtils.isEmpty(password)) {
+                if (!TextUtils.isEmpty(password)) {
                     loginPassword.setError("Please enter password!");
                 }
                 if (password.length() < 6) {

@@ -3,18 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/drawable/background_radius.xml" value="0.25833333333333336" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/drawable/edit_text_border.xml" value="0.109375" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/drawable/undraw_access_account.xml" value="0.25833333333333336" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/drawable/undraw_mobile_user.xml" value="0.25833333333333336" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_account_setup.xml" value="0.264" />
         <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_new_post.xml" value="0.264" />
+        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_main.xml" value="0.2421875" />
         <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/fragment_home.xml" value="0.2421875" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/fragment_notification.xml" value="0.2421875" />
-        <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/menu/main_menu.xml" value="0.2421875" />
       </map>
     </option>
   </component>
