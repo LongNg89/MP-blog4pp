@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,6 +57,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         //Toolbar
         Toolbar toolbarNewPost = findViewById(R.id.toolbarNewPost);
+        //setSupportActionBar(toolbarNewPost);
         getSupportActionBar().setTitle("Add New Post");
 
         //add back button to parent activity
