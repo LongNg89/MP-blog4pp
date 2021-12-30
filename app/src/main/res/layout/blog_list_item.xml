@@ -68,6 +68,7 @@
                 android:fontFamily="@font/acme"
                 android:text="@string/username"
                 android:textColor="@color/black"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/commentProfilePic"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,8 +77,9 @@
                 android:id="@+id/blog_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="15dp"
                 android:text="@string/date"
+                android:textColor="@color/dark_charcoal"
                 app:layout_constraintStart_toEndOf="@+id/commentProfilePic"
                 app:layout_constraintTop_toBottomOf="@+id/commentUsername" />
 
