@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
                 Query firstQuery = firebaseFirestore.collection("Posts")
                         .orderBy("timeStamp", Query.Direction.DESCENDING)
                         .limit(3);
-                firstQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                firstQuery.addSnapshotListener( new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                         if (firstPageLoaded) {
@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
                     .orderBy("timeStamp", Query.Direction.DESCENDING)
                     .startAfter(lastVisible)
                     .limit(3);
-            nextQuery.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+            nextQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                     //If no more posts than documentSnapshots will be empty leading to crash
