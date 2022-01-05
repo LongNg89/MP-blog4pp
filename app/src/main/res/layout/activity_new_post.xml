@@ -72,17 +72,9 @@
         app:layout_constraintTop_toBottomOf="@+id/newPostDescription"
         app:layout_constraintVertical_bias="0.055" />
 
-    <ProgressBar
-        android:id="@+id/newPostProgress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:progressTint="@color/colorAccent"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/newPostImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/progressBarNewPost"
+        layout="@layout/progress_bar_with_text"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

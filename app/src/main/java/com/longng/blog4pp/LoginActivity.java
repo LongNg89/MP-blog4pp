@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    private ProgressBar loginProgress;
+    private LinearLayout loginProgress;
     private EditText loginEmail, loginPassword;
     private Button loginButton;
     private TextView dontHaveAccount;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.passLoginTxt);
         loginButton = findViewById(R.id.loginBtn);
         dontHaveAccount = findViewById(R.id.createNewAccount);
-        loginProgress = findViewById(R.id.loginProgressBar);
+        loginProgress = findViewById(R.id.progressBarLogin);
         mAuth = FirebaseAuth.getInstance();
 
         dontHaveAccount.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //On clicking Login button log in the user
+                // On clicking Login button log in the user
+                // set progress layout to visible
                 String email = loginEmail.getText().toString().trim();
                 String password= loginPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
@@ -63,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginPassword.setError("Password must be 6 characters or longer");
                 }
                 else {
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     loginProgress.setVisibility(View.VISIBLE);
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -77,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String error = task.getException().getMessage();
                                 Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
                             }
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             loginProgress.setVisibility(View.INVISIBLE);
                         }
                     });

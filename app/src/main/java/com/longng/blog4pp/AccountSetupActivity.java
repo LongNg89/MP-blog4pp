@@ -12,9 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,14 +46,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountSetupActivity extends AppCompatActivity {
     //imports
-    private ProgressBar progressBar;
+    private LinearLayout setupProgress;
     private CircleImageView userImg;
     private Uri main_uri = null;
     private Uri default_uri = null;
 
-    private FirebaseAuth mAuth;
     private FirebaseFirestore fireStore;
-    private boolean isChanged = true;
+    //private boolean isChanged = true;
 
     private StorageReference mStorageRef;
     private Button submit;
@@ -69,7 +69,7 @@ public class AccountSetupActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         submit = findViewById(R.id.saveBtn);
-        progressBar = findViewById(R.id.accountProgressBar);
+        setupProgress = findViewById(R.id.progressBarSetup);
         user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         fireStore = FirebaseFirestore.getInstance();
@@ -82,7 +82,6 @@ public class AccountSetupActivity extends AppCompatActivity {
         fireStore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                progressBar.setVisibility(View.VISIBLE);
                 if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         String name = task.getResult().getString("name");
@@ -102,11 +101,9 @@ public class AccountSetupActivity extends AppCompatActivity {
                         main_uri = default_uri;
                         Toast.makeText(AccountSetupActivity.this, "NO DATA EXISTS", Toast.LENGTH_SHORT).show();
                     }
-                    progressBar.setVisibility(View.INVISIBLE);
                 }
-                else {
+                else
                     Toast.makeText(AccountSetupActivity.this, "Firestore Retrieve Error", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -114,14 +111,11 @@ public class AccountSetupActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
                 String uName = userName.getText().toString();
-                if (isChanged) {
-                    if (TextUtils.isEmpty(uName))
-                        userName.setError("Please enter user name!");
-                    else
-                        uploadProfile(uName);
-                }
+                if (TextUtils.isEmpty(uName))
+                    userName.setError("Please enter user name!");
+                else
+                    uploadProfile(uName);
             }
         });
 
@@ -177,6 +171,8 @@ public class AccountSetupActivity extends AppCompatActivity {
     }
 
     private void uploadProfile(String uName) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        setupProgress.setVisibility(View.VISIBLE);
         if (userImg.getDrawable() != null) {
             userImg.setDrawingCacheEnabled(true);
             userImg.buildDrawingCache();
@@ -190,7 +186,7 @@ public class AccountSetupActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                    while (!uriTask.isSuccessful()) ;
+                    while (!uriTask.isSuccessful());
                     String downloadUri = uriTask.getResult().toString();
                     if (uriTask.isSuccessful()) {
                         //Create HashMap with keys and values
@@ -202,30 +198,34 @@ public class AccountSetupActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d("mpProject", "uploadToFireStore:success");
-                                    Toast.makeText(AccountSetupActivity.this, "Settings Saved Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AccountSetupActivity.this, "Settings Saved Successfully", Toast.LENGTH_SHORT).show();
                                     Intent main = new Intent(AccountSetupActivity.this, MainActivity.class);
                                     startActivity(main);
-                                } else {
+                                }
+                                else {
                                     Log.w("mpProject", "uploadToFireStore:failure", task.getException());
                                     String error = task.getException().getMessage();
-                                    Toast.makeText(AccountSetupActivity.this, " FireStore Error" + error, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AccountSetupActivity.this, "FireStore Error" + error, Toast.LENGTH_SHORT).show();
                                 }
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                setupProgress.setVisibility(View.INVISIBLE);
                             }
                         });
-                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AccountSetupActivity.this, "Image Error" + e, Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(AccountSetupActivity.this, "Image Error " + e, Toast.LENGTH_SHORT).show();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    setupProgress.setVisibility(View.INVISIBLE);
                 }
             });
         }
         else {
-            Toast.makeText(AccountSetupActivity.this, "No image", Toast.LENGTH_LONG).show();
-            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(AccountSetupActivity.this, "No image", Toast.LENGTH_SHORT).show();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            setupProgress.setVisibility(View.INVISIBLE);
         }
     }
 }

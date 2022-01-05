@@ -12,6 +12,7 @@
     <color name="purple_500">#9C27B0</color>
     <color name="purple_700">#673AB7</color>
     <color name="white">#FFFFFF</color>
+    <color name="teal_background">#B2EBC7</color>
     <color name="teal_200">#80CBC4 </color>
     <color name="teal_700">#00796B</color>
     <color name="black">#000000</color>
@@ -19,5 +20,6 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="dark_blue">#002863</color>
     <color name="dark_charcoal">#333333</color>
+    <color name="white_progress_layout">#CCFFFFFF</color>
 
 </resources>

@@ -7,16 +7,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +48,7 @@ public class NewPostActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private ImageView newPostImg;
     private Uri main_uri = null;
-    private ProgressBar progressBar;
+    private LinearLayout postProgress;
     private String postText;
     private Bitmap compressedImageBitmap;
 
@@ -67,7 +69,7 @@ public class NewPostActivity extends AppCompatActivity {
         newPostImg = findViewById(R.id.newPostImage);
         newPostText = findViewById(R.id.newPostDescription);
         Button submitBtn = findViewById(R.id.newPostBtn);
-        progressBar = findViewById(R.id.newPostProgress);
+        postProgress = findViewById(R.id.progressBarNewPost);
 
         newPostImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +86,10 @@ public class NewPostActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                postProgress.setVisibility(View.VISIBLE);
                 postText = newPostText.getText().toString();
-                progressBar.setVisibility(View.VISIBLE);
                 if (main_uri != null && !TextUtils.isEmpty(postText)) {
-                    progressBar.setVisibility(View.VISIBLE);
                     final String randomName = UUID.randomUUID().toString();
                     //Create storage path reference
                     StorageReference filePath = storageReference.child("post_images").child(randomName + ".jpg");
@@ -141,33 +143,36 @@ public class NewPostActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<DocumentReference> task) {
                                                             if (task.isSuccessful()) {
-                                                                progressBar.setVisibility(View.INVISIBLE);
-                                                                Toast.makeText(NewPostActivity.this, "Post Successful!", Toast.LENGTH_LONG).show();
+                                                                Toast.makeText(NewPostActivity.this, "Post Successful!", Toast.LENGTH_SHORT).show();
                                                                 Intent main = new Intent(NewPostActivity.this,MainActivity.class);
                                                                 startActivity(main);
                                                                 finish();
                                                             }
                                                             else {
-                                                                Toast.makeText(NewPostActivity.this, "Error" + task.getException().toString(), Toast.LENGTH_SHORT).show();
-                                                                progressBar.setVisibility(View.INVISIBLE);
+                                                                Toast.makeText(NewPostActivity.this, "Error " + task.getException().toString(), Toast.LENGTH_SHORT).show();
                                                             }
+                                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                                            postProgress.setVisibility(View.INVISIBLE);
                                                         }
                                                     });
                                                 }
-                                                else {
-                                                    Toast.makeText(NewPostActivity.this, "Error" + uriTask.getException().toString(), Toast.LENGTH_SHORT).show();
-                                                    progressBar.setVisibility(View.INVISIBLE);
-                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(NewPostActivity.this, "Error " + e, Toast.LENGTH_SHORT).show();
+                                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                                postProgress.setVisibility(View.INVISIBLE);
                                             }
                                         });
-
                                     }
                                 }
                             });
                 }
                 else {
                     Toast.makeText(NewPostActivity.this, "No Image or Description", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.INVISIBLE);
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    postProgress.setVisibility(View.INVISIBLE);
                 }
             }
         });
