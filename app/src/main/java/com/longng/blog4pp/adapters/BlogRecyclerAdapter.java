@@ -150,9 +150,9 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
                 public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
                     try {
                         if (documentSnapshot.exists())
-                            holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.ic_like_red));
+                            holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.drawable.ic_like_red));
                         else
-                            holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.mipmap.ic_like_gray));
+                            holder.blogLikeBtn.setImageDrawable(context.getDrawable(R.drawable.ic_like_gray));
                     }
                     catch (NullPointerException E) {
                         Toast.makeText(context.getApplicationContext(), "Error: " + e, Toast.LENGTH_LONG).show();
@@ -253,12 +253,12 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
         //Set Like Count
         private void setLikes(int count){
-            String text = count + " Likes";
+            String text = count + " Like";
             blogLikeCount.setText(text);
         }
 
         private void setComments(int countC){
-            String textC = countC + " Comments";
+            String textC = countC + " Comment";
             blogCommentCount.setText(textC);
         }
     }

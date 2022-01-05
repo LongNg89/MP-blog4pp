@@ -7,31 +7,19 @@
     android:background="@mipmap/rectangle_background"
     tools:context=".NewPostActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarNewPost"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark"
-        android:minHeight="?android:attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/newPostImage"
         android:layout_width="0dp"
-        android:layout_height="220dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="300dp"
         android:background="@drawable/post_placeholder"
         android:contentDescription="@string/contentDescLogo"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarNewPost"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.105" />
 
     <EditText
@@ -70,7 +58,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
-        android:background="@mipmap/rect3"
+        android:background="@drawable/rect3"
         android:fontFamily="@font/acme"
         android:gravity="center"
         android:text="@string/add_post"
@@ -95,6 +83,6 @@
         app:layout_constraintBottom_toTopOf="@+id/newPostImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarNewPost" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

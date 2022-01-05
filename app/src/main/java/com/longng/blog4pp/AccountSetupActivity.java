@@ -87,11 +87,11 @@ public class AccountSetupActivity extends AppCompatActivity {
 
                         // Glide set avatar placeholder
                         RequestOptions placeHolder = new RequestOptions();
-                        placeHolder.placeholder(R.mipmap.user);
+                        placeHolder.placeholder(R.drawable.user);
 
                         //Convert image string to URI and store it in mainImageUri
                         main_uri = Uri.parse(image);
-                        Glide.with(AccountSetupActivity.this).setDefaultRequestOptions(placeHolder.placeholder(R.mipmap.user)).load(image).into(userImg);
+                        Glide.with(AccountSetupActivity.this).setDefaultRequestOptions(placeHolder.placeholder(R.drawable.user)).load(image).into(userImg);
                     }
                     else {
                         main_uri = default_uri;
