@@ -138,11 +138,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
-    }
 
     private void sendToLogin() {
         Intent login = new Intent(MainActivity.this, LoginActivity.class);

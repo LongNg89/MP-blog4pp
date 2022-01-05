@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +64,10 @@ public class AccountSetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setup);
 
+        getSupportActionBar().setTitle("Account Setup");
+        //add up button to return to parent activity
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         submit = findViewById(R.id.saveBtn);
         progressBar = findViewById(R.id.accountProgressBar);
         user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -71,7 +76,7 @@ public class AccountSetupActivity extends AppCompatActivity {
         userName = findViewById(R.id.username);
         userImg = findViewById(R.id.profile);
 
-        default_uri = Uri.parse("R.mipmap.user");
+        default_uri = Uri.parse("R.drawable.user");
 
         // Each time go to this activity, check if username and avatar have already present in FireStore, if yes retrieve and set username & avatar using Glide
         fireStore.collection("Users").document(user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -149,6 +154,28 @@ public class AccountSetupActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                userImg.setImageURI(resultUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                Toast.makeText(AccountSetupActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void uploadProfile(String uName) {
         if (userImg.getDrawable() != null) {
             userImg.setDrawingCacheEnabled(true);
@@ -200,20 +227,5 @@ public class AccountSetupActivity extends AppCompatActivity {
             Toast.makeText(AccountSetupActivity.this, "No image", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.INVISIBLE);
         }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-                userImg.setImageURI(resultUri);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-                Toast.makeText(AccountSetupActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }
