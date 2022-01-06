@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_weight="1"
+        android:id="@+id/imvAvartars"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/ic_launcher" >
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <LinearLayout
+        android:layout_weight="20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNameFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mr Been"
+            android:textColor="#192d57"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/txtLastMessages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Hello, Hello, Hello, Hello my name is Alexandra Mai. I have an appointment with Ms. Frederick at 2 p.m."
+            android:textColor="#909091"
+            android:textSize="10dp"
+            android:paddingRight="70dp"></TextView>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:00"
+        android:textSize="10dp"
+        android:layout_gravity="center_vertical">
+    </TextView>
+
+</LinearLayout>

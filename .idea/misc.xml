@@ -20,10 +20,28 @@
         <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/layout/fragment_notification.xml" value="0.2421875" />
         <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/menu/main_bottom.xml" value="0.2421875" />
         <entry key="..\:/Android_Project/Blog4pp/app/src/main/res/menu/main_menu.xml" value="0.2421875" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/drawable/background_receiver_message.xml" value="0.2703125" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/drawable/background_sender_message.xml" value="0.2703125" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/drawable/btn_add_on_edt.xml" value="0.2703125" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/drawable/custom_input.xml" value="0.2703125" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/activity_account_setup.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/activity_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/comment_list_item.xml" value="0.4" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/custom_input.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/fragment_account.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/fragment_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/item_message.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/layout/item_user_chat.xml" value="0.536" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/menu/main_bottom.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HelloMinh/AndroidStudioProjects/MP-blog4pp/app/src/main/res/menu/main_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

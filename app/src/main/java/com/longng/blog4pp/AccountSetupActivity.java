@@ -2,6 +2,7 @@ package com.longng.blog4pp;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.ModuleInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -28,15 +29,21 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.longng.blog4pp.databaseReference.DataBaseManager;
+import com.longng.blog4pp.models.UserModel;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -165,11 +172,13 @@ public class AccountSetupActivity extends AppCompatActivity {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful()) ;
                     String downloadUri = uriTask.getResult().toString();
+
                     if (uriTask.isSuccessful()) {
                         //Create HashMap with keys and values
                         Map<String, String> userMap = new HashMap<>();
                         userMap.put("name", uName);
                         userMap.put("image", downloadUri);
+                        updateUser(user_id,uName,downloadUri);
                         fireStore.collection("Users").document(user_id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -216,4 +225,15 @@ public class AccountSetupActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    private void updateUser(String uid, String uname, String downloadUri){
+        Map<String,Object> update = new HashMap();
+        update.put("/username/",uname);
+        update.put("/avartar/",downloadUri);
+        DataBaseManager
+                .getInstance()
+                .getTableUsersByID(uid) // reference to object id in realtime db
+                .updateChildren(update);
+    }
+
 }
