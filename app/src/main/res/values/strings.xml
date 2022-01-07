@@ -34,4 +34,6 @@
     <string name="comment_count">420 Comment</string>
     <string name="contentDescImg">image</string>
     <string name="progress">Please wait..</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset password</string>
 </resources>

@@ -2,12 +2,14 @@ package com.longng.blog4pp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView dontHaveAccount;
     private FirebaseAuth mAuth;
+    private ImageView imageHideView;
+    boolean isEnable;
+    private TextView forgotPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         dontHaveAccount = findViewById(R.id.createNewAccount);
         loginProgress = findViewById(R.id.progressBarLogin);
         mAuth = FirebaseAuth.getInstance();
+        imageHideView = findViewById(R.id.icon_hide_view);
+        forgotPassword = (TextView) findViewById(R.id.forgot_password);
+
+        forgotPassword.setOnClickListener(v -> {
+            sendToReset();
+            finish();
+        });
 
         dontHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +61,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        imageHideView.setOnClickListener(v -> {
+            if(!isEnable) {
+                isEnable = true;
+                imageHideView.setSelected(isEnable);
+                loginPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }
+            else {
+                isEnable = false;
+                imageHideView.setSelected(isEnable);
+                loginPassword.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +122,11 @@ public class LoginActivity extends AppCompatActivity {
         //If user have logged in send back to MainActivity
         if(currentUser != null)
             sendToMain();
+    }
+
+    private void sendToReset() {
+        Intent reset = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+        startActivity(reset);
     }
 
     private void sendToMain() {
