@@ -14,12 +14,22 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.longng.blog4pp.R;
+import com.longng.blog4pp.databaseReference.DataBaseManager;
 import com.longng.blog4pp.models.BlogPostModel;
+import com.longng.blog4pp.models.MessageModel;
 import com.longng.blog4pp.models.UserModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,6 +45,8 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     FirebaseAuth mAuth;
     private String currentId;
 
+    private DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+
     public UserMessAdapter( List<UserModel> userList, int layoutRes, OnItemClickListener onItemClickListener) {
         this.userList = userList;
         this.layoutRes = layoutRes;
@@ -45,7 +57,6 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("minhdz", "checked 6");
         firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentId = mAuth.getCurrentUser().getUid();
@@ -63,11 +74,8 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserModel user = userList.get(position);
 
-        Log.d("minhdz", "checked 6");
-
         holder.txtNameFriends.setText(user.getUsername());
-        holder.txtLastMessages.setText("this is last message...");
-        holder.imvAvartars.setImageResource(R.mipmap.ic_launcher);
+        setLastMessageAnTimeByUID(user.getUid(),holder);
         firebaseFirestore.collection("Users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -90,6 +98,36 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
         });
     }
 
+    private String convertTime(Date date) {
+        return dateFormat.format(date);
+    }
+
+    private void setLastMessageAnTimeByUID(String myFriendID,ViewHolder holder) {
+        DatabaseReference dbRef = DataBaseManager.getInstance().getTableMessagesByID(currentId);
+        Query query = dbRef.child(myFriendID).orderByKey().limitToLast(1);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        String message = ds.child("message").getValue(String.class);
+                        Date timeForMessage = ds.child("timeForMessage").getValue(Date.class);
+                        if (message != null&&timeForMessage!=null){
+                            holder.txtLastMessages.setText(message);
+                            holder.txtTimeOfLastMessage.setText(convertTime(timeForMessage));
+                        }else{
+                            holder.txtLastMessages.setText("you haven't texted this person yet");
+                            holder.txtTimeOfLastMessage.setText("");
+                        }
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     @Override
     public int getItemCount() {
         return userList.size();
@@ -99,6 +137,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
         private CircleImageView imvAvartars;
         private TextView txtNameFriends;
         private TextView txtLastMessages;
+        private TextView txtTimeOfLastMessage;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -107,6 +146,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
             imvAvartars = itemView.findViewById(R.id.imvAvartars);
             txtNameFriends = itemView.findViewById(R.id.txtNameFriends);
             txtLastMessages = itemView.findViewById(R.id.txtLastMessages);
+            txtTimeOfLastMessage = itemView.findViewById(R.id.txtTimeOfLastMessage);
         }
 
         private void imvAvartars(String userAvartar) {

@@ -35,7 +35,11 @@ public class MessageFragment extends Fragment implements UserMessAdapter.OnItemC
     private UserMessAdapter userMessAdapter;
     private ArrayList<UserModel> listData = new ArrayList<>();
     private String idCurrent ;
+
+    public static final String KEY_USERNAME = "KEY_USERNAME" ;
+    public static final String KEY_AVARTAR = "KEY_AVARTAR" ;
     public static final String KEY_ID = "KEY_ID" ;
+
 
     public MessageFragment() {
         // Required empty public constructor
@@ -125,7 +129,12 @@ public class MessageFragment extends Fragment implements UserMessAdapter.OnItemC
     @Override
     public void onItemClick(UserModel user) {
         Intent intent = new Intent(getActivity().getApplication(), MessageActivity.class);
-        intent.putExtra(KEY_ID,user.getUid());
+        Log.d("minhdz", user.toString());
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_ID,user.getUid());
+        bundle.putString(KEY_USERNAME,user.getUsername());
+        bundle.putString(KEY_AVARTAR, user.getAvartar());
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

@@ -23,6 +23,7 @@
             android:layout_marginRight="8dp"
             android:background="@drawable/background_receiver_message"
             android:padding="8dp"
+            android:textSize="17dp"
             android:text="hi im am your friend hi im am your friend hi im am your friend "
             android:textColor="#54555a"></TextView>
 
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:text="12:00"
+            android:textColor="#73000000"
             android:textSize="10dp"></TextView>
 
     </LinearLayout>
@@ -52,6 +54,7 @@
             android:layout_gravity="bottom"
             android:layout_marginRight="8dp"
             android:text="12:00"
+            android:textColor="#73000000"
             android:textSize="10dp"></TextView>
 
         <TextView
@@ -62,6 +65,7 @@
             android:background="@drawable/background_sender_message"
             android:gravity="right"
             android:padding="8dp"
+            android:textSize="17dp"
             android:text="hello im Minh Dep Trai hello im Minh Dep Trai hello im Minh Dep Trai"
             android:textColor="#54555a">
 

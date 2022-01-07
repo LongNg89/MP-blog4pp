@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".MessageActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvMessage"
@@ -30,10 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
+            android:textColorHint="#74000000"
             android:hint="Type your message..."
             android:padding="8dp">
         </EditText>
         <ImageView
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:id="@+id/btnSend"
             android:onClick="SendMessageHandler"
