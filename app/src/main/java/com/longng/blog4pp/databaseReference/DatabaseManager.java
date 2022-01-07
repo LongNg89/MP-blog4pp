@@ -3,17 +3,17 @@ package com.longng.blog4pp.databaseReference;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class DataBaseManager {
+public class DatabaseManager {
     private DatabaseReference databaseReference;
     private static final String TABLE_USER = "USERS";
     private static final String TABLE_CONNECTED = "CONNECTED";
     private static final String TABLE_MESSAGES = "MESSAGES";
 
-    public static DataBaseManager getInstance(){
-        return new DataBaseManager();
+    public static DatabaseManager getInstance(){
+        return new DatabaseManager();
     }
 
-    public DataBaseManager() {
+    public DatabaseManager() {
         databaseReference = FirebaseDatabase.getInstance("https://blog-e61dc-default-rtdb.firebaseio.com/").getReference();
     }
 

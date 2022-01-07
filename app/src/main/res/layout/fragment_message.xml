@@ -15,6 +15,8 @@
         android:orientation="vertical"
         android:background="#B4A2DF">
         <EditText
+            android:id="@+id/edtSearchUserMessage"
+            android:inputType="textPersonName"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"

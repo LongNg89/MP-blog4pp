@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Blog4pp">
         <activity
             android:name=".MessageActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".CommentActivity"
             android:exported="true" />

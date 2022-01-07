@@ -19,7 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.longng.blog4pp.databaseReference.DataBaseManager;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
 import com.longng.blog4pp.models.UserModel;
 
 
@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void saveUser(UserModel userModel){
-        DataBaseManager
+        DatabaseManager
                 .getInstance()
                 .getTableUsersByID(userModel.getUid())
                 .setValue(userModel);

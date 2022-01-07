@@ -17,11 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.longng.blog4pp.adapters.MessageAdapter;
-import com.longng.blog4pp.adapters.UserMessAdapter;
-import com.longng.blog4pp.databaseReference.DataBaseManager;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
 import com.longng.blog4pp.fragments.MessageFragment;
 import com.longng.blog4pp.models.MessageModel;
-import com.longng.blog4pp.models.UserModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,7 +71,7 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     }
 
     private void getDataMessage() {
-        DataBaseManager.getInstance()
+        com.longng.blog4pp.databaseReference.DatabaseManager.getInstance()
                 .getTableMessagesByID(myID)
                 .child(myFriendID)
                 .addValueEventListener(new ValueEventListener() {
@@ -98,12 +96,12 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     }
 
     private void setupDataBaseReferent() {
-        messageMeRef = DataBaseManager
+        messageMeRef = com.longng.blog4pp.databaseReference.DatabaseManager
                 .getInstance()
                 .getTableMessagesByID(myID)
                 .child(myFriendID);
 
-        messageMyFriendRef = DataBaseManager
+        messageMyFriendRef = DatabaseManager
                 .getInstance()
                 .getTableMessagesByID(myFriendID)
                 .child(myID);

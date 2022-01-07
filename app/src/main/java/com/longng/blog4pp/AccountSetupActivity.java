@@ -2,7 +2,6 @@ package com.longng.blog4pp;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.ModuleInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,21 +28,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.longng.blog4pp.databaseReference.DataBaseManager;
-import com.longng.blog4pp.models.UserModel;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -229,8 +223,8 @@ public class AccountSetupActivity extends AppCompatActivity {
     private void updateUser(String uid, String uname, String downloadUri){
         Map<String,Object> update = new HashMap();
         update.put("/username/",uname);
-        update.put("/avartar/",downloadUri);
-        DataBaseManager
+        update.put("/avatar/",downloadUri);
+        DatabaseManager
                 .getInstance()
                 .getTableUsersByID(uid) // reference to object id in realtime db
                 .updateChildren(update);

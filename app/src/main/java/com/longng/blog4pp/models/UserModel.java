@@ -1,7 +1,7 @@
 package com.longng.blog4pp.models;
 
 public class UserModel {
-     private String uid,email,password,avartar,username;
+     private String uid,email,password,avatar,username;
 
     public UserModel(String uid, String email, String password) {
         this.uid = uid;
@@ -13,7 +13,7 @@ public class UserModel {
         this.uid = uid;
         this.email = email;
         this.password = password;
-        this.avartar = avartar;
+        this.avatar = avartar;
         this.username = username;
     }
 
@@ -46,11 +46,11 @@ public class UserModel {
     }
 
     public String getAvartar() {
-        return avartar;
+        return avatar;
     }
 
     public void setAvartar(String avartar) {
-        this.avartar = avartar;
+        this.avatar = avartar;
     }
 
     public String getUsername() {

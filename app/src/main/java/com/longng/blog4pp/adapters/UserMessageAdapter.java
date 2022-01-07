@@ -22,9 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.longng.blog4pp.R;
-import com.longng.blog4pp.databaseReference.DataBaseManager;
-import com.longng.blog4pp.models.BlogPostModel;
-import com.longng.blog4pp.models.MessageModel;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
 import com.longng.blog4pp.models.UserModel;
 
 import java.text.DateFormat;
@@ -35,7 +33,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHolder> {
+public class UserMessageAdapter extends RecyclerView.Adapter<UserMessageAdapter.ViewHolder> {
     private Context context;
     private List<UserModel> userList;
     private int layoutRes;
@@ -47,7 +45,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
 
     private DateFormat dateFormat = new SimpleDateFormat("hh:mm");
 
-    public UserMessAdapter( List<UserModel> userList, int layoutRes, OnItemClickListener onItemClickListener) {
+    public UserMessageAdapter(List<UserModel> userList, int layoutRes, OnItemClickListener onItemClickListener) {
         this.userList = userList;
         this.layoutRes = layoutRes;
         this.onItemClickListener = onItemClickListener;
@@ -103,7 +101,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     }
 
     private void setLastMessageAnTimeByUID(String myFriendID,ViewHolder holder) {
-        DatabaseReference dbRef = DataBaseManager.getInstance().getTableMessagesByID(currentId);
+        DatabaseReference dbRef = DatabaseManager.getInstance().getTableMessagesByID(currentId);
         Query query = dbRef.child(myFriendID).orderByKey().limitToLast(1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -134,7 +132,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private CircleImageView imvAvartars;
+        private CircleImageView imvAvatars;
         private TextView txtNameFriends;
         private TextView txtLastMessages;
         private TextView txtTimeOfLastMessage;
@@ -143,14 +141,14 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imvAvartars = itemView.findViewById(R.id.imvAvartars);
+            imvAvatars = itemView.findViewById(R.id.imvAvartars);
             txtNameFriends = itemView.findViewById(R.id.txtNameFriends);
             txtLastMessages = itemView.findViewById(R.id.txtLastMessages);
             txtTimeOfLastMessage = itemView.findViewById(R.id.txtTimeOfLastMessage);
         }
 
         private void imvAvartars(String userAvartar) {
-            Glide.with(context).load(userAvartar).into(imvAvartars);
+            Glide.with(context).load(userAvartar).into(imvAvatars);
         }
     }
 
