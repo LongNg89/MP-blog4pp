@@ -10,7 +10,7 @@
         android:id="@+id/imvAvartars"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher" >
+        android:src="@drawable/user_icon" >
     </de.hdodenhof.circleimageview.CircleImageView>
     <LinearLayout
         android:layout_weight="20"
@@ -23,7 +23,7 @@
             android:id="@+id/txtNameFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mr Been"
+            android:text="User"
             android:textColor="#192d57"
             android:textSize="20dp"></TextView>
 
@@ -34,7 +34,7 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Hello, Hello, Hello, Hello my name is Alexandra Mai. I have an appointment with Ms. Frederick at 2 p.m."
+            android:text="this is last message"
             android:textColor="#909091"
             android:textSize="10dp"
             android:paddingRight="70dp"></TextView>

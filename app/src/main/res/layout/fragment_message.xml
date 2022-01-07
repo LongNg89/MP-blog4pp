@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".fragments.MessageFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -29,6 +30,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvListFriendInMessage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

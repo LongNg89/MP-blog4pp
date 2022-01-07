@@ -39,21 +39,23 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
         this.userList = userList;
         this.layoutRes = layoutRes;
         this.onItemClickListener = onItemClickListener;
+        Log.d("minhdz", "checked 1");
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        firebaseFirestore =FirebaseFirestore.getInstance();
+        Log.d("minhdz", "checked 6");
+        firebaseFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentId = mAuth.getCurrentUser().getUid();
 
+        context = parent.getContext();
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(layoutRes,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
-        context = parent.getContext();
         return viewHolder;
     }
 
@@ -61,11 +63,12 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserModel user = userList.get(position);
 
-        Log.d("minhdz", "checked");
+        Log.d("minhdz", "checked 6");
 
-        holder.txtNameFriends.setText(user.getEmail());
+        holder.txtNameFriends.setText(user.getUsername());
         holder.txtLastMessages.setText("this is last message...");
-        firebaseFirestore.collection("Users").document(user.getAvartar()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        holder.imvAvartars.setImageResource(R.mipmap.ic_launcher);
+        firebaseFirestore.collection("Users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
@@ -95,7 +98,7 @@ public class UserMessAdapter extends RecyclerView.Adapter<UserMessAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView imvAvartars;
         private TextView txtNameFriends;
-        private  TextView txtLastMessages;
+        private TextView txtLastMessages;
 
 
         public ViewHolder(@NonNull View itemView) {

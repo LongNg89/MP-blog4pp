@@ -1,5 +1,6 @@
 package com.longng.blog4pp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.longng.blog4pp.MessageActivity;
 import com.longng.blog4pp.R;
 import com.longng.blog4pp.adapters.UserMessAdapter;
 import com.longng.blog4pp.databaseReference.DataBaseManager;
@@ -50,7 +52,7 @@ public class MessageFragment extends Fragment implements UserMessAdapter.OnItemC
 //        loadData();
         showUserConnectedByCurrentUser();
 
-        return inflater.inflate(R.layout.fragment_message, container, false);
+        return view;
     }
 
     private void loadData() {
@@ -79,27 +81,35 @@ public class MessageFragment extends Fragment implements UserMessAdapter.OnItemC
 //        setupActionBar(idCurrent);
     }
     private void showUserConnectedByCurrentUser() {
+        Log.d("minhdz", "checked 3");
         DataBaseManager
                 .getInstance()
                 .getTableUsers()
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Log.d("minhdz", "checked 4");
+//
+//                        UserModel userModel = snapshot.getValue(UserModel.class);
+//                        listData.add(userModel);
+//                        userMessAdapter.notifyDataSetChanged();
+
                         listData.clear();
                         for (DataSnapshot temp: snapshot.getChildren()){
+
                             UserModel user = temp.getValue(UserModel.class);
                             listData.add(user);
                             Log.d("minhdz", user.getEmail());
-                            userMessAdapter.notifyDataSetChanged();
                         }
+                        userMessAdapter.notifyDataSetChanged();
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
+        Log.d("minhdz", "checked 5");
     }
 
     private void initView(View view) {
@@ -107,15 +117,16 @@ public class MessageFragment extends Fragment implements UserMessAdapter.OnItemC
         idCurrent = mAuth.getUid();
         rcvListFriendInMessage = view.findViewById(R.id.rcvListFriendInMessage);
         userMessAdapter = new UserMessAdapter(listData,R.layout.item_user_chat,this);
-        rcvListFriendInMessage.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        rcvListFriendInMessage.setLayoutManager(new LinearLayoutManager(this.getActivity(),LinearLayoutManager.VERTICAL,false));
         rcvListFriendInMessage.setAdapter(userMessAdapter);
+        Log.d("minhdz", "checked 2");
     }
 
     @Override
     public void onItemClick(UserModel user) {
-//        Intent intent = new Intent(MainActivity.this,ChattingActivity.class);
-//        intent.putExtra(KEY_ID,user.getId());
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity().getApplication(), MessageActivity.class);
+        intent.putExtra(KEY_ID,user.getUid());
+        startActivity(intent);
     }
 
     @Override
