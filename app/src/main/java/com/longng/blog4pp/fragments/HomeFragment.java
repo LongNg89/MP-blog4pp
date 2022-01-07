@@ -6,36 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.longng.blog4pp.R;
-import com.longng.blog4pp.adapters.BlogRecyclerAdapter;
-import com.longng.blog4pp.models.BlogPostModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    private RecyclerView blogListView;
-    //Create list of model class type
-    private List<BlogPostModel> blogList;
-    private DocumentSnapshot lastVisible;
-    private FirebaseFirestore firebaseFirestore;
-    private FirebaseAuth mAuth;
-    private BlogRecyclerAdapter blogRecycleAdapter;
-    private boolean firstPageLoaded = true;
 
     public HomeFragment() {
         // Required empty public constructor

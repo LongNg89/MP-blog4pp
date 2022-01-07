@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -188,11 +189,13 @@ public class AccountSetupActivity extends AppCompatActivity {
                     Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!uriTask.isSuccessful());
                     String downloadUri = uriTask.getResult().toString();
+
                     if (uriTask.isSuccessful()) {
                         //Create HashMap with keys and values
                         Map<String, String> userMap = new HashMap<>();
                         userMap.put("name", uName);
                         userMap.put("image", downloadUri);
+                        updateUser(user_id,uName,downloadUri);
                         fireStore.collection("Users").document(user_id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -228,4 +231,15 @@ public class AccountSetupActivity extends AppCompatActivity {
             setupProgress.setVisibility(View.INVISIBLE);
         }
     }
+
+    private void updateUser(String uid, String uname, String downloadUri){
+        Map<String,Object> update = new HashMap();
+        update.put("/username/",uname);
+        update.put("/avatar/",downloadUri);
+        DatabaseManager
+                .getInstance()
+                .getTableUsersByID(uid) // reference to object id in realtime db
+                .updateChildren(update);
+    }
+
 }

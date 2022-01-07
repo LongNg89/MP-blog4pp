@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.longng.blog4pp.databaseReference.DatabaseManager;
+import com.longng.blog4pp.models.UserModel;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -78,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Log.d("mpProject","signInWithEmail:success");
+                                    UserModel userModel = new UserModel(mAuth.getUid(),email,password,"","");
+                                    saveUser(userModel);
                                     Toast.makeText(RegisterActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
                                     sendToSetting();
                                 }
@@ -107,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         //If user have logged in send back to MainActivity
         if(currentUser != null){
             sendToMain();
@@ -121,5 +126,12 @@ public class RegisterActivity extends AppCompatActivity {
     private void sendToLogin() {
         Intent login = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(login);
+    }
+
+    private void saveUser(UserModel userModel){
+        DatabaseManager
+                .getInstance()
+                .getTableUsersByID(userModel.getUid())
+                .setValue(userModel);
     }
 }
