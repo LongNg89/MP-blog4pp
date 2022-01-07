@@ -191,14 +191,9 @@
         app:layout_constraintTop_toBottomOf="@+id/registerBtn"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ProgressBar
-        android:id="@+id/registerProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/progressBarRegister"
+        layout="@layout/progress_bar_with_text"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

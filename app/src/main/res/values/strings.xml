@@ -30,10 +30,11 @@
         Nor is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain,
         but occasionally circumstances occur in which toil and pain can procure him some great pleasure.
     </string>
-    <string name="like_count">69</string>
-    <string name="comment_count">420</string>
+    <string name="like_count">69 Like</string>
+    <string name="comment_count">420 Comment</string>
     <string name="contentDescImg">image</string>
     <string name="message">Chat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_message_fragment">Message fragment</string>
+    <string name="progress">Please wait..</string>
 </resources>

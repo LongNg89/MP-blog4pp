@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ import com.longng.blog4pp.models.UserModel;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private ProgressBar registerProgress;
+    private LinearLayout registerProgress;
     private EditText registerEmail, registerPassword, registerConfirmPassword;
     private Button registerButton;
     private TextView alreadyHaveAccount;
@@ -40,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerConfirmPassword = findViewById(R.id.passConfirmRegisterTxt);
         registerButton = findViewById(R.id.registerBtn);
         alreadyHaveAccount = findViewById(R.id.alreadyHaveAccount);
-        registerProgress = findViewById(R.id.registerProgressBar);
+        registerProgress = findViewById(R.id.progressBarRegister);
         mAuth = FirebaseAuth.getInstance();
 
         alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                     registerConfirmPassword.setError("Password not match!");
                 }
                 else {
-                        registerProgress.setVisibility(View.VISIBLE);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    registerProgress.setVisibility(View.VISIBLE);
                         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -81,13 +83,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     UserModel userModel = new UserModel(mAuth.getUid(),email,password,"","");
                                     saveUser(userModel);
                                     Toast.makeText(RegisterActivity.this,"Register successful!", Toast.LENGTH_LONG).show();
-                                    //sendToSetting();
+                                    sendToSetting();
                                 }
                                 else {
                                     Log.w("mpProject", "signUpWithEmail:failure", task.getException());
                                     String error = task.getException().getMessage();
                                     Toast.makeText(RegisterActivity.this, error, Toast.LENGTH_SHORT).show();
                                 }
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 registerProgress.setVisibility(View.INVISIBLE);
                             }
                         });
