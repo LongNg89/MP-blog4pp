@@ -37,4 +37,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_message_fragment">Message fragment</string>
     <string name="progress">Please wait..</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="reset_password">Reset password</string>
 </resources>
