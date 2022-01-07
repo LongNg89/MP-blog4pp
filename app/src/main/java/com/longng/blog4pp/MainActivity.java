@@ -21,16 +21,18 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.longng.blog4pp.fragments.AccountFragment;
 import com.longng.blog4pp.fragments.HomeFragment;
+import com.longng.blog4pp.fragments.MessageFragment;
 import com.longng.blog4pp.fragments.NotificationFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar toolBar;
+    private Toolbar toolbar;
     private String user_id;
     private FloatingActionButton newPostButton;
     private BottomNavigationView bottomNavigationView;
     private HomeFragment homeFragment;
     private AccountFragment accountFragment;
     private NotificationFragment notificationFragment;
+    private MessageFragment messageFragment;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             homeFragment = new HomeFragment();
             notificationFragment = new NotificationFragment();
             accountFragment = new AccountFragment();
+            messageFragment = new MessageFragment();
 
             replaceFragment(homeFragment);
 
@@ -59,14 +62,17 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.bottomAccount:
-                            replaceFragment(accountFragment);
-                            return true;
                         case R.id.bottomHome:
                             replaceFragment(homeFragment);
                             return true;
                         case R.id.bottomNotification:
                             replaceFragment(notificationFragment);
+                            return true;
+                        case R.id.bottomAccount:
+                            replaceFragment(accountFragment);
+                            return true;
+                        case R.id.bottomMessage:
+                            replaceFragment(messageFragment);
                             return true;
                     }
                     return false;

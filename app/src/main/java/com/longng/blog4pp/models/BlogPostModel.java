@@ -8,7 +8,6 @@ public class BlogPostModel extends BlogPostId{
     public Date timeStamp;
 
     public BlogPostModel() {
-
     }
 
     public BlogPostModel(String image_url, String image_thumb, String desc, String user_id, Date timeStamp) {

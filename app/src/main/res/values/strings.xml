@@ -33,6 +33,9 @@
     <string name="like_count">69 Like</string>
     <string name="comment_count">420 Comment</string>
     <string name="contentDescImg">image</string>
+    <string name="message">Chat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_message_fragment">Message fragment</string>
     <string name="progress">Please wait..</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="reset_password">Reset password</string>

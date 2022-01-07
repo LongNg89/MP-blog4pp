@@ -17,6 +17,9 @@
             android:name=".ResetPasswordActivity"
             android:exported="true" />
         <activity
+            android:name=".MessageActivity"
+            android:exported="true" />
+        <activity
             android:name=".CommentActivity"
             android:exported="true" />
         <activity
