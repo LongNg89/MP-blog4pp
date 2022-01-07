@@ -82,7 +82,7 @@
 
         <ImageView
             android:id="@+id/pass_icon"
-            android:layout_width="15dp"
+            android:layout_width="50dp"
             android:layout_height="25dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
@@ -110,15 +110,14 @@
             android:textColorHint="@color/light_grey"
             android:textSize="17sp" />
 
-        <ImageButton
-            android:id="@+id/icon_hide_view"
+        <ImageView
+            android:id="@+id/show_password_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             android:contentDescription="@string/contentDescIcon"
             app:srcCompat="@android:drawable/ic_menu_view" />
-
     </LinearLayout>
 
     <Button
@@ -140,7 +139,6 @@
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_layout" />
 
@@ -162,20 +160,21 @@
 
     <TextView
         android:id="@+id/forgot_password"
-        android:text="@string/forgot_password"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="35dp"
         android:orientation="horizontal"
+        android:padding="10dp"
+        android:text="@string/forgot_password"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_layout"
-        app:layout_constraintVertical_bias="0.513"
-        android:padding="10dp"/>
+        app:layout_constraintVertical_bias="0.453" />
 
     <include
         android:id="@+id/progressBarLogin"

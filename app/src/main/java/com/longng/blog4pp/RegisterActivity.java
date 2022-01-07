@@ -2,12 +2,16 @@ package com.longng.blog4pp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerEmail, registerPassword, registerConfirmPassword;
     private Button registerButton;
     private TextView alreadyHaveAccount;
+    boolean isEnable;
+    private ImageView registerShowPassButton, registerShowConfirmPassButton;
     private FirebaseAuth mAuth;
 
     @Override
@@ -36,13 +42,33 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().setTitle("Register");
+        // add up button to return to parent activity
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         registerEmail = findViewById(R.id.emailRegisterTxt);
         registerPassword = findViewById(R.id.passRegisterTxt);
         registerConfirmPassword = findViewById(R.id.passConfirmRegisterTxt);
         registerButton = findViewById(R.id.registerBtn);
+        registerShowPassButton = findViewById(R.id.show_password_icon1);
+        registerShowConfirmPassButton = findViewById(R.id.show_password_icon2);
         alreadyHaveAccount = findViewById(R.id.alreadyHaveAccount);
         registerProgress = findViewById(R.id.progressBarRegister);
         mAuth = FirebaseAuth.getInstance();
+
+        registerShowPassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPass(registerPassword);
+            }
+        });
+
+        registerShowConfirmPassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPass(registerConfirmPassword);
+            }
+        });
 
         alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +85,25 @@ public class RegisterActivity extends AppCompatActivity {
                 email = registerEmail.getText().toString().trim();
                 password = registerPassword.getText().toString().trim();
                 passConfirm = registerConfirmPassword.getText().toString().trim();
-
-                if (TextUtils.isEmpty(email)) {
-                    registerEmail.setError("Please enter email address!");
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    registerEmail.setError("Please enter valid email!");
+                    registerEmail.requestFocus();
                 }
-                if (TextUtils.isEmpty(password)) {
+                else if (TextUtils.isEmpty(password)) {
                     registerPassword.setError("Please enter password!");
+                    registerPassword.requestFocus();
                 }
-                if (password.length() < 6) {
+                else if (TextUtils.isEmpty(passConfirm)) {
+                    registerConfirmPassword.setError("Please enter confirm password!");
+                    registerConfirmPassword.requestFocus();
+                }
+                else if (password.length() < 6) {
                     registerPassword.setError("Password must be 6 characters or longer!");
+                    registerPassword.requestFocus();
                 }
-                if (!password.equals(passConfirm)) {
+                else if (!password.equals(passConfirm)) {
                     registerConfirmPassword.setError("Password not match!");
+                    registerConfirmPassword.requestFocus();
                 }
                 else {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -100,6 +133,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    private void showPass(EditText password) {
+        if(!isEnable) {
+            isEnable = true;
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        else {
+            isEnable = false;
+            password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
+    }
+
     private void sendToSetting() {
         Intent accountSetup = new Intent(RegisterActivity.this, AccountSetupActivity.class);
         startActivity(accountSetup);
@@ -116,6 +160,14 @@ public class RegisterActivity extends AppCompatActivity {
         if(currentUser != null){
             sendToMain();
         }
+    }
+
+
+    // when click on up button, return to parent activity
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        sendToLogin();
+        return super.onOptionsItemSelected(item);
     }
 
     private void sendToMain() {
