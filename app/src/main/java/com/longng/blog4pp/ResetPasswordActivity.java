@@ -2,8 +2,8 @@ package com.longng.blog4pp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,12 +22,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private EditText resetEmail;
     private Button resetButton;
     private LinearLayout resetProgress;
-
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
+
+        getSupportActionBar().setTitle("Reset Password");
+        // add up button to return to parent activity
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         resetEmail = findViewById(R.id.emailResetTxt);
         resetButton = findViewById(R.id.resetBtn);
@@ -37,19 +41,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            resetPassword();
+                resetPassword();
             }
         });
     }
     private void resetPassword(){
         String email = resetEmail.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email)) {
-            resetEmail.setError("Email is required!!!");
-            resetEmail.requestFocus();
-        }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            resetEmail.setError("Please provide valid email!");
+            resetEmail.setError("Please enter valid email!");
             resetEmail.requestFocus();
         }
         else {
@@ -69,6 +68,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    // when click on up button, return to parent activity
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        sendToLogin();
+        return super.onOptionsItemSelected(item);
     }
 
     private void sendToLogin() {

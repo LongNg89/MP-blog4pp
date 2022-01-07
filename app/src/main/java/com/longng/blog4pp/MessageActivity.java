@@ -1,15 +1,16 @@
 package com.longng.blog4pp;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,7 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     private RecyclerView rcvMessage;
 
     private String usernameOfYourFriend;
-    private String avartarOfYourFriend;
+    private String avatarOfYourFriend;
 
     private DatabaseReference messageMeRef;
     private DatabaseReference messageMyFriendRef;
@@ -55,7 +56,7 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     private void initView() {
         Bundle bundle = getIntent().getExtras();
         usernameOfYourFriend = bundle.getString(MessageFragment.KEY_USERNAME);
-        avartarOfYourFriend = bundle.getString(MessageFragment.KEY_AVARTAR);
+        avatarOfYourFriend = bundle.getString(MessageFragment.KEY_AVARTAR);
         myFriendID = bundle.getString(MessageFragment.KEY_ID);
         myID = FirebaseAuth.getInstance().getUid();
 
@@ -111,7 +112,7 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(usernameOfYourFriend);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setIcon(  R.mipmap.ic_launcher);
+        actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setDisplayUseLogoEnabled(true);
     }
 
@@ -131,6 +132,14 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
 
 
         edtChat.setText("");
+    }
+
+    // when click on up button, return to parent activity
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

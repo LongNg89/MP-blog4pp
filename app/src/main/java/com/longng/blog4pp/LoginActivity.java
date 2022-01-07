@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private TextView dontHaveAccount;
     private FirebaseAuth mAuth;
-    private ImageView imageHideView;
+    private ImageView loginShowPassButton;
     boolean isEnable;
     private TextView forgotPassword;
 
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         dontHaveAccount = findViewById(R.id.createNewAccount);
         loginProgress = findViewById(R.id.progressBarLogin);
         mAuth = FirebaseAuth.getInstance();
-        imageHideView = findViewById(R.id.icon_hide_view);
+        loginShowPassButton = findViewById(R.id.show_password_icon);
         forgotPassword = (TextView) findViewById(R.id.forgot_password);
 
         forgotPassword.setOnClickListener(v -> {
@@ -61,18 +62,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        imageHideView.setOnClickListener(v -> {
-            if(!isEnable) {
-                isEnable = true;
-                imageHideView.setSelected(isEnable);
-                loginPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            }
-            else {
-                isEnable = false;
-                imageHideView.setSelected(isEnable);
-                loginPassword.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            }
+        loginShowPassButton.setOnClickListener(v -> {
+            showPass(loginPassword);
         });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,14 +73,17 @@ public class LoginActivity extends AppCompatActivity {
                 // set progress layout to visible
                 String email = loginEmail.getText().toString().trim();
                 String password= loginPassword.getText().toString().trim();
-                if (TextUtils.isEmpty(email)) {
-                    loginEmail.setError("Please enter email address!");
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    loginEmail.setError("Please enter valid email!");
+                    loginEmail.requestFocus();
                 }
-                if (TextUtils.isEmpty(password)) {
+                else if (TextUtils.isEmpty(password)) {
                     loginPassword.setError("Please enter password!");
+                    loginPassword.requestFocus();
                 }
-                if (password.length() < 6) {
-                    loginPassword.setError("Password must be 6 characters or longer");
+                else if (password.length() < 6) {
+                    loginPassword.setError("Password must be 6 characters or longer!");
+                    loginPassword.requestFocus();
                 }
                 else {
                     getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -112,6 +108,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void showPass(EditText password) {
+        if(!isEnable) {
+            isEnable = true;
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        else {
+            isEnable = false;
+            password.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
     }
 
     //Checks if the user have already logged in
