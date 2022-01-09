@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -150,5 +151,9 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     @Override
     public void onItemLongClick(MessageModel message) {
 
+    }
+
+    public void showMessage(View view) {
+        Toast.makeText(MessageActivity.this, "The functions will be updated in the future" , Toast.LENGTH_SHORT).show();
     }
 }

@@ -21,6 +21,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:onClick="showMessage"
             android:src="@drawable/btn_add_on_edt">
         </de.hdodenhof.circleimageview.CircleImageView>
         <EditText

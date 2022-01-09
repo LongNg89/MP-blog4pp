@@ -26,7 +26,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private String id;
     private MessageAdapter.OnItemClickListener onItemClickListener;
 
-    private DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+    private DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
     public MessageAdapter(Context context, List<MessageModel> messageList, int layoutRes, String id, MessageAdapter.OnItemClickListener onItemClickListener) {
         this.context = context;
@@ -55,7 +55,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }else{
             holder.llYourMessage.setVisibility(View.GONE);
             holder.txtYourFriendMessage.setText(message.getMessage());
-            holder.txtTimeYourFriendMessage.setText(message.getTimeForMessage().toString());
+            holder.txtTimeYourFriendMessage.setText(convertTime(message.getTimeForMessage()));
         }
 
 //        Log.d("minhdz", "time: "+message.getMessage());

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BodyBackground"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <!--logo-->
@@ -61,7 +61,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
-            android:textColor="@color/white"
+            android:textColor="#192d57"
             android:textColorHint="@color/light_grey"
             android:textSize="17sp" />
     </LinearLayout>
@@ -106,7 +106,7 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            android:textColor="#192d57"
             android:textColorHint="@color/light_grey"
             android:textSize="17sp" />
 
@@ -129,11 +129,11 @@
         android:background="@drawable/login"
         android:elevation="0dp"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="@string/login"
+        android:text="Sign In"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -151,12 +151,13 @@
         android:fontFamily="@font/averia_libre_bold"
         android:text="@string/create_new_account"
         android:textAllCaps="false"
-        android:textColor="@color/bottom_text"
+        android:textColor="#ED9A96"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintVertical_bias="0.75" />
 
     <TextView
         android:id="@+id/forgot_password"

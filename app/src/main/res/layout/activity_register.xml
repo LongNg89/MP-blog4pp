@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BodyBackground"
+    android:background="@color/white"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -60,7 +60,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
-            android:textColor="@color/white"
+            android:textColor="#192d57"
             android:textColorHint="@color/light_grey"
             android:autofillHints="emailAddress"
             android:textSize="17sp" />
@@ -105,7 +105,7 @@
             android:ems="10"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            android:textColor="#192d57"
             android:textColorHint="@color/light_grey"
             android:textSize="17sp" />
 
@@ -159,7 +159,7 @@
             android:ems="10"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
-            android:textColor="@color/white"
+            android:textColor="#192d57"
             android:textColorHint="@color/light_grey"
             android:textSize="17sp" />
 
@@ -183,11 +183,11 @@
         android:background="@drawable/login"
         android:elevation="0dp"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="@string/register"
+        android:text="Sign Up"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -204,7 +204,7 @@
         android:fontFamily="@font/averia_libre_bold"
         android:text="@string/already_have_an_account"
         android:textAllCaps="false"
-        android:textColor="@color/bottom_text"
+        android:textColor="#FFB5B1"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

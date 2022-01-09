@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/rectangle_background"
+    android:background="@color/white"
     tools:context=".NewPostActivity">
 
     <ImageView
@@ -33,7 +33,8 @@
         android:background="@drawable/edit_text_border"
         android:ems="10"
         android:gravity="start"
-        android:hint="@string/add_description"
+        android:hint="What's on your mind ?"
+
         android:includeFontPadding="true"
         android:inputType="textMultiLine|textAutoCorrect"
         android:paddingStart="10dp"
@@ -41,7 +42,7 @@
         android:paddingEnd="10dp"
         android:paddingBottom="5dp"
         android:textColor="@android:color/background_light"
-        android:textColorHint="@android:color/background_light"
+        android:textColorHint="@color/light_grey"
         android:textIsSelectable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/rect3"
+        android:background="@drawable/login"
         android:fontFamily="@font/acme"
         android:gravity="center"
         android:text="@string/add_post"

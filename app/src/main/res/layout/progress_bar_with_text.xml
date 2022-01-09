@@ -10,7 +10,7 @@
         android:id="@+id/progressCircular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/btnBack" />
+        android:indeterminateTint="#FF837D" />
 
     <TextView
         android:id="@+id/progressText"
@@ -19,6 +19,6 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/progress"
-        android:textColor="@color/btnBack"
+        android:textColor="#FF837D"
         android:textStyle="bold"/>
 </LinearLayout>
