@@ -19,6 +19,6 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/progress"
-        android:textColor="#FF837D"
+        android:textColor="#BF453F"
         android:textStyle="bold"/>
 </LinearLayout>
