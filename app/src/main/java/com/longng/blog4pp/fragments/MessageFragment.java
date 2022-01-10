@@ -2,7 +2,6 @@ package com.longng.blog4pp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +38,7 @@ public class MessageFragment extends Fragment implements UserMessageAdapter.OnIt
     private String myUserName;
 
     public static final String KEY_USERNAME = "KEY_USERNAME" ;
-    public static final String KEY_AVARTAR = "KEY_AVARTAR" ;
+    public static final String KEY_AVATAR = "KEY_AVATAR" ;
     public static final String KEY_ID = "KEY_ID" ;
 
 
@@ -55,56 +54,26 @@ public class MessageFragment extends Fragment implements UserMessageAdapter.OnIt
         View view = inflater.inflate(R.layout.fragment_message, container, false);
 
         initView(view);
-//        loadData();
         showUserConnectedByCurrentUser();
 
         return view;
     }
 
-    private void loadData() {
-
-//        showUserConnectedByCurrentUser(idCurrent);
-//        DatabaseManager
-//                .getInstance()
-//                .getTableConnectedByID(idCurrent)
-//                .addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        Log.d("DDM","connected by "+idCurrent);
-//                        for(DataSnapshot data:snapshot.getChildren()){
-//                            listData.clear();
-//                            String connectedId = data.getKey();
-//                            Log.d("DDM",connectedId);
-//                            showUserConnectedByCurrentUser(connectedId);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//        setupActionBar(idCurrent);
-    }
     private void showUserConnectedByCurrentUser() {
-        Log.d("minhdz", "checked 3");
         DatabaseManager
                 .getInstance()
                 .getTableUsers()
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d("minhdz", "checked 4");
                         listData.clear();
                         for (DataSnapshot temp: snapshot.getChildren()){
 
                             UserModel user = temp.getValue(UserModel.class);
                             listData.add(user);
-                            if (user.getUid().equals(idCurrent)){
+                            if (idCurrent.equals(user.getUid())) {
                                 myUserName = user.getUsername();
                             }
-
-                            Log.d("minhdz", user.getEmail());
                         }
                         userMessageAdapter.notifyDataSetChanged();
 
@@ -114,7 +83,6 @@ public class MessageFragment extends Fragment implements UserMessageAdapter.OnIt
 
                     }
                 });
-        Log.d("minhdz", "checked 5");
     }
 
     private void initView(View view) {
@@ -134,38 +102,33 @@ public class MessageFragment extends Fragment implements UserMessageAdapter.OnIt
             }
         });
 
-        userMessageAdapter = new UserMessageAdapter(listData,R.layout.item_user_chat,this);
+        userMessageAdapter = new UserMessageAdapter(listData,R.layout.user_chat_list_item,this);
         rcvListFriendInMessage.setLayoutManager(new LinearLayoutManager(this.getActivity(),LinearLayoutManager.VERTICAL,false));
         rcvListFriendInMessage.setAdapter(userMessageAdapter);
-        Log.d("minhdz", "checked 2");
     }
 
     private void searchUserMessage() {
         String textSearch = edtSearchUserMessage.getText().toString().trim();
-        Log.d("minhdz", textSearch);
         ArrayList<UserModel> filteredList = new ArrayList<>();
         for (UserModel userModel:listData){
             if (userModel.getUsername().contains(textSearch)){
                 filteredList.add(userModel);
-                Log.d("minhdz", userModel.getUsername());
             }
         }
 
-        userMessageAdapter = new UserMessageAdapter(filteredList,R.layout.item_user_chat,this);
+        userMessageAdapter = new UserMessageAdapter(filteredList,R.layout.user_chat_list_item,this);
         rcvListFriendInMessage.setLayoutManager(new LinearLayoutManager(this.getActivity(),LinearLayoutManager.VERTICAL,false));
         rcvListFriendInMessage.setAdapter(userMessageAdapter);
-
     }
 
 
     @Override
     public void onItemClick(UserModel user) {
         Intent intent = new Intent(getActivity().getApplication(), MessageActivity.class);
-        Log.d("minhdz", user.toString());
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_ID,user.getUid());
-        bundle.putString(KEY_USERNAME,user.getUsername());
-        bundle.putString(KEY_AVARTAR, user.getAvartar());
+        bundle.putString(KEY_ID, user.getUid());
+        bundle.putString(KEY_USERNAME, user.getUsername());
+        bundle.putString(KEY_AVATAR, user.getAvatar());
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -57,7 +57,7 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     private void initView() {
         Bundle bundle = getIntent().getExtras();
         usernameOfYourFriend = bundle.getString(MessageFragment.KEY_USERNAME);
-        avatarOfYourFriend = bundle.getString(MessageFragment.KEY_AVARTAR);
+        avatarOfYourFriend = bundle.getString(MessageFragment.KEY_AVATAR);
         myFriendID = bundle.getString(MessageFragment.KEY_ID);
         myID = FirebaseAuth.getInstance().getUid();
 
@@ -65,11 +65,9 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
         edtChat = findViewById(R.id.edtChat);
         rcvMessage = findViewById(R.id.rcvMessage);
 
-        messageAdapter = new MessageAdapter(this,listMessage,R.layout.item_message, myID,this);
+        messageAdapter = new MessageAdapter(this,listMessage,R.layout.message_list_item, myID,this);
         rcvMessage.setLayoutManager(new LinearLayoutManager(this));
         rcvMessage.setAdapter(messageAdapter);
-
-
     }
 
     private void getDataMessage() {
@@ -79,12 +77,10 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                         listMessage.clear();
-                        for (DataSnapshot temp: snapshot.getChildren()){
+                        for (DataSnapshot temp: snapshot.getChildren()) {
                             MessageModel message = temp.getValue(MessageModel.class);
                             listMessage.add(message);
-
                         }
                         messageAdapter.notifyDataSetChanged();;
                     }

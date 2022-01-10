@@ -12,7 +12,7 @@
         android:id="@+id/llYourFriendMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
         android:orientation="horizontal">
 
         <TextView
@@ -20,12 +20,12 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/background_receiver_message"
             android:padding="8dp"
-            android:textColor="#54555a"
-            android:textSize="17dp"
-            android:text="hi im am your friend hi im am your friend hi im am your friend "
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/light_grey"
+            android:textSize="17sp"
             android:textIsSelectable="true" />
 
         <TextView
@@ -34,14 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="12:00"
-            android:textColor="#73000000"
-            android:textSize="10dp"/>
+            android:text="@string/time"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llYourdMessage"
+        android:id="@+id/llYourMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -54,22 +54,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginRight="8dp"
-            android:text="12:00"
-            android:textColor="#73000000"
-            android:textSize="10dp"/>
+            android:text="@string/time"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/txtYourMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:background="@drawable/background_sender_message"
-            android:gravity="right"
+            android:gravity="end"
             android:padding="8dp"
             android:textIsSelectable="true"
-            android:textSize="17dp"
-            android:text="hello im Minh Dep Trai hello im Minh Dep Trai hello im Minh Dep Trai"
-            android:textColor="#54555a">
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/light_grey"
+            android:textSize="17sp">
 
         </TextView>
 

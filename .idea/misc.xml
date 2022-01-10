@@ -28,8 +28,14 @@
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/activity_reset_password.xml" value="0.3625" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/blog_list_item.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/comment_list_item.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/fragment_account.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/fragment_home.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/fragment_message.xml" value="0.271875" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/item_message.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/message_list_item.xml" value="0.271875" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/progress_bar_with_text.xml" value="0.271875" />
+        <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/layout/user_chat_list_item.xml" value="0.271875" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/menu/main_bottom.xml" value="0.271875" />
         <entry key="..\:/New folder/Mobile/MyProjects/MP-blog4pp/app/src/main/res/menu/main_menu.xml" value="0.271875" />
       </map>

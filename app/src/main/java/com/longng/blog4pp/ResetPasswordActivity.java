@@ -45,6 +45,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             }
         });
     }
+
     private void resetPassword(){
         String email = resetEmail.getText().toString().trim();
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
@@ -60,8 +61,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(ResetPasswordActivity.this, "Check your email to reset password, please!", Toast.LENGTH_SHORT).show();
                         sendToLogin();
-                    } else {
-                        Toast.makeText(ResetPasswordActivity.this, "Something wrong, try again!", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(ResetPasswordActivity.this, "Something wrong, try again!", Toast.LENGTH_SHORT).show();
                     }
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     resetProgress.setVisibility(View.INVISIBLE);

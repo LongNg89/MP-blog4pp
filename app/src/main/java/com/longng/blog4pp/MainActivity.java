@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 else {
                                     // if user hasn't set up name and avatar, go to AccountSetupActivity
-                                    Toast.makeText(MainActivity.this, "Please choose profile photo and name", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(MainActivity.this, "Please choose profile photo and name", Toast.LENGTH_SHORT).show();
                                     Intent accSetup = new Intent(MainActivity.this, AccountSetupActivity.class);
                                     startActivity(accSetup);
                                 }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                     else {
-                        Toast.makeText(MainActivity.this, "Please choose profile photo and name", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Please choose profile photo and name", Toast.LENGTH_SHORT).show();
                         Intent accSetup = new Intent(MainActivity.this, AccountSetupActivity.class);
                         startActivity(accSetup);
                     }
