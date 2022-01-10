@@ -16,11 +16,22 @@ Làm ứng dụng Blog đơn giản
 
 <a name="idea"> </a>
 ## 1. Idea
-* mấy cái mục này Dung viết nhé:v văn hay chữ tốt
+* Dựa trên nhu cầu thực tế và kiến thức lĩnh hội trong qua trình học tập môn Lập trinh Mobile, nhóm 11 đã quyết định làm ứng dụng blog mobile theo mô hình CRUD. Tính năng:
+
+1. Tạo người dùng bằng email và mật khẩu
+2. Đăng ký và Đăng nhập, Khởi tạo lại mật khẩu
+3. Đăng xuất Người dùng đã đăng nhập
+4. Ghi và đọc từ cơ sở dữ liệu
+5. Xóa dữ liệu khỏi Firebase trong ứng dụng
+6. Tạo Hồ sơ Người dùng và Cắt hình ảnh khi tải lên
+7. Liên kết bài viết với chủ sở hữu tương ứng."
+
 <a name="goals"> </a>
 ## 2. Goals
+* Để kết nối mọi người, chia sẻ cuộc sống, niềm vui, liên lạc nhắn tin trò chuyện
 
-<a name="technology-&-tools"> </a>
+<a name="technology-&-tools"> </a> 
+
 ## 3. Technology & Tools
 * Android Studio
 * Github
