@@ -1,7 +1,6 @@
 package com.longng.blog4pp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,6 @@ public class UserMessageAdapter extends RecyclerView.Adapter<UserMessageAdapter.
         this.userList = userList;
         this.layoutRes = layoutRes;
         this.onItemClickListener = onItemClickListener;
-        Log.d("minhdz", "checked 1");
     }
 
     @NonNull
@@ -73,14 +71,14 @@ public class UserMessageAdapter extends RecyclerView.Adapter<UserMessageAdapter.
         UserModel user = userList.get(position);
 
         holder.txtNameFriends.setText(user.getUsername());
-        setLastMessageAnTimeByUID(user.getUid(),holder);
-        firebaseFirestore.collection("Users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        setLastMessageAnTimeByUID(user.getUid()+"",holder);
+        firebaseFirestore.collection("Users").document(user.getUid()+"").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     if(task.getResult().exists()){
-                        String userAvartar = task.getResult().getString("image");
-                        holder.imvAvartars(userAvartar);
+                        String userAvatar = task.getResult().getString("image");
+                        holder.imvAvatars(userAvatar);
                     }
                 }
             }
@@ -102,7 +100,7 @@ public class UserMessageAdapter extends RecyclerView.Adapter<UserMessageAdapter.
 
     private void setLastMessageAnTimeByUID(String myFriendID,ViewHolder holder) {
         DatabaseReference dbRef = DatabaseManager.getInstance().getTableMessagesByID(currentId);
-        Query query = dbRef.child(myFriendID).orderByKey().limitToLast(1);
+        Query query = dbRef.child(myFriendID + "").orderByKey().limitToLast(1);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,14 +139,14 @@ public class UserMessageAdapter extends RecyclerView.Adapter<UserMessageAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imvAvatars = itemView.findViewById(R.id.imvAvartars);
+            imvAvatars = itemView.findViewById(R.id.imvAvatars);
             txtNameFriends = itemView.findViewById(R.id.txtNameFriends);
             txtLastMessages = itemView.findViewById(R.id.txtLastMessages);
             txtTimeOfLastMessage = itemView.findViewById(R.id.txtTimeOfLastMessage);
         }
 
-        private void imvAvartars(String userAvartar) {
-            Glide.with(context).load(userAvartar).into(imvAvatars);
+        private void imvAvatars(String userAvatar) {
+            Glide.with(context).load(userAvatar).into(imvAvatars);
         }
     }
 

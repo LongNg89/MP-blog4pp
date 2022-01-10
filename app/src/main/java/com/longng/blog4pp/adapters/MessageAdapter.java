@@ -1,7 +1,6 @@
 package com.longng.blog4pp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,9 +56,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.txtYourFriendMessage.setText(message.getMessage());
             holder.txtTimeYourFriendMessage.setText(convertTime(message.getTimeForMessage()));
         }
-
-//        Log.d("minhdz", "time: "+message.getMessage());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,18 +83,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         private TextView txtTimeYourFriendMessage;
         private LinearLayout llYourFriendMessage;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             txtYourMessage = itemView.findViewById(R.id.txtYourMessage);
             txtTimeYourMessage = itemView.findViewById(R.id.txtTimeYourMessage);
-            llYourMessage = itemView.findViewById(R.id.llYourdMessage);
+            llYourMessage = itemView.findViewById(R.id.llYourMessage);
 
             txtYourFriendMessage = itemView.findViewById(R.id.txtYourFriendMessage);
             txtTimeYourFriendMessage = itemView.findViewById(R.id.txtTimeYourFriendMessage);
             llYourFriendMessage = itemView.findViewById(R.id.llYourFriendMessage);
-
         }
     }
 
@@ -106,6 +99,4 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         void onItemClick(MessageModel message);
         void onItemLongClick(MessageModel message);
     }
-
-
 }

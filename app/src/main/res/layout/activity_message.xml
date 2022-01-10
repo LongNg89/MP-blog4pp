@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".MessageActivity">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvMessage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
-        android:background="#f1f1f2"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:onClick="showMessage"
             android:src="@drawable/btn_add_on_edt">
         </de.hdodenhof.circleimageview.CircleImageView>
+
         <EditText
+            android:autofillHints="name"
+            android:hint="@string/type_your_message"
             android:id="@+id/edtChat"
             android:background="@color/white"
             android:layout_marginStart="8dp"
@@ -32,11 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:textColorHint="#74000000"
-            android:hint="Type your message..."
+            android:inputType="textAutoComplete|textMultiLine"
+            android:textColorHint="@color/light_grey"
             android:padding="8dp">
         </EditText>
+
         <ImageView
+            android:contentDescription="@string/contentDescIcon"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:id="@+id/btnSend"
@@ -45,6 +52,7 @@
             android:layout_height="30dp"
             android:src="@drawable/btn_send_on_edt">
         </ImageView>
+
     </LinearLayout>
 
 </LinearLayout>

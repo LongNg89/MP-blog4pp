@@ -40,4 +40,9 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="reset_password">Reset password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="search">Search ...</string>
+    <string name="todo">The functions will be updated in the future</string>
+    <string name="type_your_message">Type your message...</string>
+    <string name="user">User</string>
+    <string name="time">12:00</string>
 </resources>

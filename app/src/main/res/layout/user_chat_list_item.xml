@@ -5,13 +5,13 @@
     android:orientation="horizontal"
     android:padding="16dp">
     <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_weight="1"
-        android:id="@+id/imvAvartars"
+        android:id="@+id/imvAvatars"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/user_icon" >
     </de.hdodenhof.circleimageview.CircleImageView>
+
     <LinearLayout
         android:layout_weight="20"
         android:layout_width="wrap_content"
@@ -23,9 +23,9 @@
             android:id="@+id/txtNameFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User"
+            android:text="@string/user"
             android:textColor="#192d57"
-            android:textSize="20dp"></TextView>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/txtLastMessages"
@@ -36,8 +36,8 @@
             android:maxLines="2"
             android:text=""
             android:textColor="#80000000"
-            android:textSize="10dp"
-            android:paddingRight="70dp"></TextView>
+            android:paddingEnd="70dp"
+            android:textSize="12sp"/>
     </LinearLayout>
     <TextView
         android:id="@+id/txtTimeOfLastMessage"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:layout_gravity="center_vertical">
     </TextView>
 
